@@ -1,4 +1,4 @@
-package com.genband.util.log;
+package com.genband.util.log.constants;
 
 public enum LogConfigConstants {
   default_log_path("config.properties"),

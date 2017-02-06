@@ -1,4 +1,4 @@
-package com.genband.util.log;
+package com.genband.util.log.config;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -10,6 +10,8 @@ import java.util.Properties;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.log4j.Logger;
 import org.springframework.util.ResourceUtils;
+
+import com.genband.util.log.constants.LogConfigConstants;
 
 /**
  * this class is configuration for kubernetes connection. Any other configuration of services on k8s

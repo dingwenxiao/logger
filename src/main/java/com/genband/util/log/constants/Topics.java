@@ -1,4 +1,4 @@
-package com.genband.util.log;
+package com.genband.util.log.constants;
 
 public enum Topics {
   info("info"), trace("trace"), debug("debug"), error("error"), warn("warn");

@@ -1,18 +1,22 @@
 package com.genband.util.log;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
-import org.apache.log4j.Logger;
 import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.core.appender.AppenderLoggingException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import com.genband.util.log.config.ConfigManager;
+import com.genband.util.log.config.KafkaConfigManager;
+import com.genband.util.log.constants.LogConfigConstants;
+import com.genband.util.log.constants.Topics;
 
 import io.fabric8.kubernetes.client.KubernetesClientException;
 import io.fabric8.kubernetes.client.Watch;
 
 public class LoggerOperation {
 
-  private static final Logger logger = Logger.getLogger(LoggerOperation.class);
+  private static final Logger logger = LogManager.getLogger(LoggerOperation.class);
   private static ConfigManager configManager = null;
 
   public static boolean LoggerAppenderUpdate() {

@@ -63,6 +63,11 @@
 			<artifactId>jul-to-slf4j</artifactId>
 			<version>${slf4j.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-ext</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
 		<!-- this might be replaced by message util later -->
 		<dependency>
 			<groupId>org.apache.kafka</groupId>

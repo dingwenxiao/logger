@@ -7,9 +7,9 @@ import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.genband.util.log.ConfigManager;
-import com.genband.util.log.KafkaConfigManager;
 import com.genband.util.log.KubernetesNetworkService;
+import com.genband.util.log.config.ConfigManager;
+import com.genband.util.log.config.KafkaConfigManager;
 
 public class KubernetesNetworkServiceTest {
 

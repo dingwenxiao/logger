@@ -13,6 +13,9 @@ import org.apache.logging.log4j.core.filter.CompositeFilter;
 import org.apache.logging.log4j.core.filter.ThresholdFilter;
 import org.apache.logging.log4j.core.layout.PatternLayout;
 
+import com.genband.util.log.config.ConfigManager;
+import com.genband.util.log.constants.LogConfigConstants;
+
 /**
  * Dynamically add kafka log4j appender
  * 

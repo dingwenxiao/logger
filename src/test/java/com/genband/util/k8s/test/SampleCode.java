@@ -5,9 +5,9 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.genband.util.log.KafkaConfigManager;
 import com.genband.util.log.KubernetesNetworkService;
-import com.genband.util.log.LogConfigConstants;
+import com.genband.util.log.config.KafkaConfigManager;
+import com.genband.util.log.constants.LogConfigConstants;
 
 /**
  * This file should be removed after Dingwen checked.

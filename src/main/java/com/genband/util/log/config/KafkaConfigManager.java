@@ -1,4 +1,4 @@
-package com.genband.util.log;
+package com.genband.util.log.config;
 
 import java.util.HashMap;
 import java.util.Properties;

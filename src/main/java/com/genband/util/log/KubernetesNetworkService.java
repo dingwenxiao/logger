@@ -19,6 +19,9 @@ import io.fabric8.kubernetes.client.Watcher;
 
 import org.apache.log4j.Logger;
 
+import com.genband.util.log.config.ConfigManager;
+import com.genband.util.log.constants.LogConfigConstants;
+
 public enum KubernetesNetworkService {
 
   SERVICE_INSTANCE;
