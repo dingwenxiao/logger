@@ -28,7 +28,12 @@ public abstract class ConfigManager {
   private String serviceName;
   private String KUBERNETES_MASTER_URL_KEY;
   private int retries;
+  private String patternLayout = null;
   private String[] topics;
+
+  public String getPatternLayout() {
+    return patternLayout;
+  }
 
   public String getKUBERNETES_MASTER_URL_KEY() {
     return KUBERNETES_MASTER_URL_KEY;
@@ -82,18 +87,19 @@ public abstract class ConfigManager {
       input = new FileInputStream(configFilePath);
       // load a properties file
       properties.load(input);
-      kubernetesMasterUrl = properties.getProperty(LogConfigConstants.kubernetes_master_url.toString());
+      kubernetesMasterUrl =
+          properties.getProperty(LogConfigConstants.kubernetes_master_url.toString());
       if (serviceName == null || "".equals(serviceName)) {
         this.serviceName = properties.getProperty(LogConfigConstants.service.toString());
       }
       this.KUBERNETES_MASTER_URL_KEY =
           properties.getProperty(LogConfigConstants.kubernetes_master_url_key.toString());
-      this.retries =
-          NumberUtils.isNumber(properties.getProperty(LogConfigConstants.connection_retry.toString()))
-              ? NumberUtils
-                  .createInteger(properties.getProperty(LogConfigConstants.connection_retry.toString()))
+      this.retries = NumberUtils
+          .isNumber(properties.getProperty(LogConfigConstants.connection_retry.toString()))
+              ? NumberUtils.createInteger(
+                  properties.getProperty(LogConfigConstants.connection_retry.toString()))
               : NumberUtils.createInteger(LogConfigConstants.connection_retry_default.toString());
-
+      this.patternLayout = properties.getProperty(LogConfigConstants.pattern_layout.toString());
       topics = properties.getProperty(LogConfigConstants.topics.toString()).split(",");
     } catch (IOException ex) {
       logger.error(ex);

@@ -64,7 +64,7 @@ public class LogConfigurationUtil {
     loggerContext.updateLoggers(configuration);
   }
 
-  private static Level getLogLevelConfig(String level) {
+  public static Level getLogLevelConfig(String level) {
     if (level != null)
       switch (level) {
         case "info":

@@ -3,6 +3,8 @@ package com.genband.util.log.config;
 import java.util.HashMap;
 import java.util.Properties;
 
+import com.genband.util.log.constants.LogConfigConstants;
+
 /**
  * This class is for loading kafka service configuration such kafka service label.
  * 
@@ -13,14 +15,21 @@ public class KafkaConfigManager extends ConfigManager {
 
   private HashMap<String, String> kafkaLabelsMap = new HashMap<>();
 
+  private static KafkaConfigManager INASTANCE =
+      new KafkaConfigManager(LogConfigConstants.default_log_path.toString());
+
   /**
    * Constructor for kafka configuration class
    * 
    * @param configPath
    */
-  public KafkaConfigManager(String configPath) {
+  private KafkaConfigManager(String configPath) {
     super(configPath);
     loadKafkaLabelMap();
+  }
+
+  public static KafkaConfigManager getInstance() {
+    return INASTANCE;
   }
 
   /**

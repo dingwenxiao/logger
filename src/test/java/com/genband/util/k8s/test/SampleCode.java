@@ -19,7 +19,7 @@ public class SampleCode {
   private static Logger logger = LoggerFactory.getLogger(SampleCode.class.getName());
 
   public static void main(String[] args) {
-    logger.info("hello");
+    logger.error("hello");
 
     // ConfigManager configManager = new KafkaConfigManager(LogConfig.default_log_path.toString());
     // /**
@@ -49,7 +49,7 @@ public class SampleCode {
   private static String getKakfaAddress() {
 
     new KubernetesNetworkService.SingletonBuilder(
-        new KafkaConfigManager(LogConfigConstants.default_log_path.toString())).build();
+        KafkaConfigManager.getInstance()).build();
     KubernetesNetworkService kubernetesNetworkService = KubernetesNetworkService.getInstance();
     
     List<String> fetchKafkaAddress = kubernetesNetworkService.getEndPointsAddressFromConfigMap();

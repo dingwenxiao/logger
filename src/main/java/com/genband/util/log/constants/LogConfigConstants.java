@@ -13,7 +13,12 @@ public enum LogConfigConstants {
   bootstrap_servers("bootstrap.servers"),
   pattern_layout("log.pattern.layout"),
   log_level("log.level"),
-  kafka_dns("kafka.dns");
+  kafka_dns("kafka.dns"),
+  level("level"),
+  target("target"),
+  pattern_attribute("pattern"),
+  PatternLayout("PatternLayout"),
+  pattern("pattern");
   
   private final String config;
 
