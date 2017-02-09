@@ -25,10 +25,20 @@ public abstract class ConfigManager {
   private String serviceName;
   private String KUBERNETES_MASTER_URL_KEY;
   private int retries;
+  private String patternLayout = null;
   private String[] topics;
+  private String logLevel;
+  
+  public String getLogLevel() {
+    return logLevel;
+  }
 
   public String getConfigFileName() {
     return configFileName;
+  }
+
+  public String getPatternLayout() {
+    return patternLayout;
   }
 
   public String getKUBERNETES_MASTER_URL_KEY() {
@@ -88,8 +98,9 @@ public abstract class ConfigManager {
               ? NumberUtils.createInteger(
                   properties.getProperty(LogConfigConstants.connection_retry.toString()))
               : NumberUtils.createInteger(LogConfigConstants.connection_retry_default.toString());
-
+      this.patternLayout = properties.getProperty(LogConfigConstants.pattern_layout.toString());
       topics = properties.getProperty(LogConfigConstants.topics.toString()).split(",");
+      logLevel = properties.getProperty(LogConfigConstants.log_level.toString());
     } catch (IOException ex) {
       logger.error(ex);
     } finally {

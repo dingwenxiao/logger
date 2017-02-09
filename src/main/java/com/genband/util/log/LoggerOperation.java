@@ -20,7 +20,7 @@ public class LoggerOperation {
   private static ConfigManager configManager = null;
 
   public static boolean LoggerAppenderUpdate() {
-    configManager = new KafkaConfigManager(LogConfigConstants.default_log_path.toString());
+    configManager = KafkaConfigManager.getInstance();
     new KubernetesNetworkService.SingletonBuilder(configManager).build();
     KubernetesNetworkService kubernetesNetworkService = KubernetesNetworkService.getInstance();
     String kafkaAddress = getKakfaAddress(kubernetesNetworkService);
