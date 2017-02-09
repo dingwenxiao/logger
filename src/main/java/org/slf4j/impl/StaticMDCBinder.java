@@ -16,8 +16,10 @@
  */
 package org.slf4j.impl;
 
-import org.apache.logging.slf4j.Log4jMDCAdapter;
 import org.slf4j.spi.MDCAdapter;
+
+import com.genband.util.log.slf4j.Log4jMDCAdapter;
+
 
 /**
  *

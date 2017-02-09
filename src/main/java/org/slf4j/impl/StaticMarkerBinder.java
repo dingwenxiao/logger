@@ -16,9 +16,10 @@
  */
 package org.slf4j.impl;
 
-import org.apache.logging.slf4j.Log4jMarkerFactory;
 import org.slf4j.IMarkerFactory;
 import org.slf4j.spi.MarkerFactoryBinder;
+
+import com.genband.util.log.slf4j.Log4jMarkerFactory;
 
 /**
  * SLF4J MarkerFactoryBinder implementation using Log4j. This class is part of the required classes used to specify an

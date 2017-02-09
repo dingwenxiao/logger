@@ -26,7 +26,7 @@ public class LogConfigurationUtil {
 
   /**
    * 
-   * @param configManager configuration class
+   * @param configManager configuration 
    * @param kafkaAddress kafka address
    * @param appenderName logger appender name
    * @param topicName topic name

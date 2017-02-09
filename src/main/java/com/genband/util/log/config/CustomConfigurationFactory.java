@@ -31,9 +31,9 @@ public class CustomConfigurationFactory extends ConfigurationFactory {
     appenderBuilder.add(builder.newFilter("MarkerFilter", Filter.Result.DENY, Filter.Result.NEUTRAL)
         .addAttribute("marker", "FLOW"));
     builder.add(appenderBuilder);
-    builder.add(builder.newLogger("org.apache.logging.log4j", Level.ERROR)
+    builder.add(builder.newLogger("org.apache.logging.log4j", Level.ALL)
         .add(builder.newAppenderRef("Stdout")).addAttribute("additivity", false));
-    builder.add(builder.newRootLogger(Level.ERROR).add(builder.newAppenderRef("Stdout")));
+    builder.add(builder.newRootLogger(Level.ALL).add(builder.newAppenderRef("Stdout")));
     return builder.build();
   }
 
