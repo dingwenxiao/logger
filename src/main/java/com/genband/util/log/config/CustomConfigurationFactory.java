@@ -18,7 +18,7 @@ import com.genband.util.log.LogConfigurationUtil;
 import com.genband.util.log.constants.LogConfigConstants;
 
 @Plugin(name = "CustomConfigurationFactory", category = ConfigurationFactory.CATEGORY)
-@Order(5)
+@Order(1)
 public class CustomConfigurationFactory extends ConfigurationFactory {
 
   static Configuration createConfiguration(final String name,

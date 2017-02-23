@@ -37,9 +37,7 @@ public class GbLoggerFactory extends AbstractLoggerAdapter<Logger> implements IL
   protected Logger newLogger(final String name, final LoggerContext context) {
     if (!isAppenderInitialized) {
       isAppenderInitialized = true;
-      if (LoggerOperation.LoggerAppenderUpdate()) {
-        LoggerOperation.startWatch();
-      }
+      LoggerOperation.LoggerAppenderUpdate();
     }
 
     final String key = Logger.ROOT_LOGGER_NAME.equals(name) ? LogManager.ROOT_LOGGER_NAME : name;

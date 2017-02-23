@@ -1,7 +1,13 @@
 package com.genband.util.log;
 
 import java.util.List;
+import java.util.Properties;
+import java.util.concurrent.ExecutionException;
 
+import org.apache.kafka.clients.producer.KafkaProducer;
+import org.apache.kafka.clients.producer.Producer;
+import org.apache.kafka.clients.producer.ProducerRecord;
+import org.apache.kafka.clients.producer.RecordMetadata;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -50,13 +56,13 @@ public class LoggerOperation {
                   configManager.getProperties().getProperty(LogConfigConstants.service.toString())
                       + "-" + Topics.info.toString(),
                   Topics.info.toString(), Level.INFO, Level.WARN);
-        } else if (topic.equals(Topics.error.toString())) {
+        } else if (topic.equals(Topics.debug.toString())) {
           LogConfigurationUtil
               .addKafkaAppender(configManager, kafkaAddress,
                   configManager.getProperties().getProperty(LogConfigConstants.service.toString())
                       + "-" + Topics.debug.toString(),
                   Topics.debug.toString(), Level.DEBUG, Level.INFO);
-        } else if (topic.equals(Topics.error.toString())) {
+        } else if (topic.equals(Topics.trace.toString())) {
           LogConfigurationUtil
               .addKafkaAppender(configManager, kafkaAddress,
                   configManager.getProperties().getProperty(LogConfigConstants.service.toString())
@@ -84,7 +90,6 @@ public class LoggerOperation {
     if (testKafkaConnection(configManager,
         configManager.getProperties().getProperty(LogConfigConstants.kafka_dns.toString()))) {
       address = configManager.getProperties().getProperty(LogConfigConstants.kafka_dns.toString());
-      // "172.28.247.239:9092"
     } else {
       List<String> fetchKafkaAddress = kubernetesNetworkService.getEndPointsAddressFromConfigMap();
 
@@ -95,33 +100,28 @@ public class LoggerOperation {
         logger.error("Kafka adderss grabbed from kubernetes is empty");
       }
     }
-    // the kafka address is not ready yet.
+    //192.168.33.10:9092
     return address;
   }
 
-  public static void startWatch() {
-    // new Thread(new KubernetesMonitorThread(KubernetesNetworkService.getInstance())).start();
-    try (Watch watch = KubernetesNetworkService.getInstance().getEndPointsWatcher()) {
-      logger.info("Watching logs");
-      // closeLatch.await(10, TimeUnit.SECONDS);
-    } catch (KubernetesClientException e) {
-      logger.error("Could not watch resources", e);
-    }
-    try {
-      Thread.sleep(10);
-    } catch (InterruptedException e) {
-      logger.error(e);
-    } catch (Exception e) {
-      logger.error(e);
-    }
-  }
-
   private static boolean testKafkaConnection(ConfigManager configManager, String kafkaAddress) {
+    Properties props = new Properties();
+    props.put("bootstrap.servers", kafkaAddress);
+    props.put("acks", "all");
+    props.put("retries", 0);
+    props.put("batch.size", 16384);
+    props.put("linger.ms", 1);
+    props.put("buffer.memory", 33554432);
+    props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+    props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+    props.put("request.timeout.ms", 10000);
+    props.put("max.block.ms", 10000);
+    props.put("metadata.fetch.timeout.ms", 5000);
+
+    Producer<String, String> producer = new KafkaProducer<>(props);
     try {
-      LogConfigurationUtil.addKafkaAppender(configManager, kafkaAddress,
-          configManager.getProperties().getProperty(LogConfigConstants.service.toString()) + "-"
-              + Topics.info.toString(),
-          Topics.info.toString(), Level.INFO, Level.WARN);
+      producer.send(new ProducerRecord<String, String>("test-topic", "test", "test")).get();
+      producer.close();
     } catch (Exception e) {
       logger.error("failed to connect to kafka", e);
       return false;

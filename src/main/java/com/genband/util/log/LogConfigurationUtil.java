@@ -40,7 +40,9 @@ public class LogConfigurationUtil {
     final Configuration configuration = loggerContext.getConfiguration();
 
     Property[] properties = new Property[] {
-        Property.createProperty(LogConfigConstants.bootstrap_servers.toString(), kafkaAddress)};
+        Property.createProperty(LogConfigConstants.bootstrap_servers.toString(), kafkaAddress),
+        Property.createProperty("retries", "0"),
+        };
 
     Filter[] filter =
         new ThresholdFilter[] {ThresholdFilter.createFilter(thresholdFilterOneLevel, null, null),
