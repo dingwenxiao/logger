@@ -104,7 +104,7 @@ public class LoggerOperation {
     return address;
   }
 
-  private static boolean testKafkaConnection(ConfigManager configManager, String kafkaAddress) {
+  public static boolean testKafkaConnection(ConfigManager configManager, String kafkaAddress) {
     Properties props = new Properties();
     props.put("bootstrap.servers", kafkaAddress);
     props.put("acks", "all");
@@ -116,7 +116,7 @@ public class LoggerOperation {
     props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
     props.put("request.timeout.ms", 10000);
     props.put("max.block.ms", 10000);
-    props.put("metadata.fetch.timeout.ms", 5000);
+    props.put("metadata.fetch.timeout.ms", "5000");
 
     Producer<String, String> producer = new KafkaProducer<>(props);
     try {
